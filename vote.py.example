@@ -1,0 +1,26 @@
+import handsome
+import urllib.request
+from datetime import datetime
+
+user = ""
+token = ""
+request_url = "http://www.qlcoder.com/train/handsomerank"
+
+
+def vote():
+    vote_num = 
+    while (vote_num <= 1000):
+        day = datetime.today().strftime("%Y%m%d")
+        magic = handsome.computerCode(day + user + str(vote_num))
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log = "[%s]: code = %s\tvote_num = %s"% (now, magic, vote_num)
+        print (log)
+        get_url = "%s?_token=%s&user=%s&checkcode=%s"%(request_url,
+                                                    token, user, magic)
+        fp = urllib.request.urlopen(get_url)
+        fp.close()
+        vote_num += 1
+
+
+if __name__ == "__main__":
+    vote()
